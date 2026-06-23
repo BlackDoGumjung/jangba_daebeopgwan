@@ -118,7 +118,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>장바 대법관 v0.1</h1>
+      <h1>장바 대법관 v0.2</h1>
       <img src={LOGO} alt="장바 대법관" className="logo" />
       카테고리 :{" "}
       <select className="select-bar" value={category} onChange={(e) => setCategory(e.target.value as ProductCategory)}>

@@ -109,7 +109,7 @@ function App() {
       <h1>장바 대법관 v0.1</h1>
       <img src={LOGO} alt="장바 대법관" className="logo" />
       카테고리 :{" "}
-      <select value={category} onChange={(e) => setCategory(e.target.value as ProductCategory)}>
+      <select className="select-bar" value={category} onChange={(e) => setCategory(e.target.value as ProductCategory)}>
         <option value="COMMON">일반</option>
         <option value="STOCK">주식</option>
         <option value="OTAKU">오타쿠</option>

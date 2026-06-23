@@ -18,8 +18,8 @@ export const CATEGORY_WEIGHTS = {
   OTAKU: [
     { type: "BUY", weight: 20 },
     { type: "WAIT", weight: 10 },
-    { type: "USED", weight: 5 },
-    { type: "DONT_BUY", weight: 60 },
+    { type: "USED", weight: 15 },
+    { type: "DONT_BUY", weight: 50 },
     { type: "SPECIAL", weight: 5 },
   ],
 

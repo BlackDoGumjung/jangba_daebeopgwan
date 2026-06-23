@@ -63,6 +63,10 @@ button {
   justify-content: flex-end;
 }
 
+.progress-wrapper {
+  width: 100%;
+}
+
 .progress-bar {
   height: 8px;
   border-radius: 4px;

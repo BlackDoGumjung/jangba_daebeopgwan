@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { commonVerdicts, otakuVerdicts, stockVerdicts, foodVerdicts, loadingMessages } from "./data/verdicts";
 import { CATEGORY_WEIGHTS, conversions, VERDICT_LABELS } from "./data/config";
 type VerdictType = keyof typeof commonVerdicts | keyof typeof otakuVerdicts | keyof typeof stockVerdicts | keyof typeof foodVerdicts;
-import logo from "./assets/jangba_daebeopgwan.png";
+import LOGO from "./assets/jangba_daebeopgwan.png";
 
 interface VerdictResult {
   caseNumber: string;
@@ -20,6 +20,10 @@ const CATEGORY_LABELS = {
   OTAKU: otakuVerdicts,
   FOOD: foodVerdicts,
 };
+const MESSAGE_DURATION = 400;
+const TOTAL_LOADING_TIME = loadingMessages.length * MESSAGE_DURATION;
+const INTERVAL = 100;
+const increment = 100 / (TOTAL_LOADING_TIME / INTERVAL);
 
 function App() {
   const [productName, setProductName] = useState("");
@@ -59,17 +63,12 @@ function App() {
     setProgress(0);
 
     const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-
-        return prev + 2;
-      });
-    }, 200);
+      setProgress((prev) => Math.min(prev + increment, 100));
+    }, INTERVAL);
 
     setTimeout(() => {
+      clearInterval(progressInterval);
+      setProgress(100);
       const randomType = getWeightedVerdict() as VerdictType;
 
       const resultVerdictComment = CATEGORY_LABELS[category];
@@ -87,7 +86,7 @@ function App() {
       });
 
       setIsLoading(false);
-    }, 5000);
+    }, TOTAL_LOADING_TIME);
   };
   const getWeightedVerdict = () => {
     const random = Math.random() * 100;
@@ -108,7 +107,7 @@ function App() {
   return (
     <div className="container">
       <h1>장바 대법관 v0.1</h1>
-      <img src={logo} alt="장바 대법관" className="logo" />
+      <img src={LOGO} alt="장바 대법관" className="logo" />
       카테고리 :{" "}
       <select value={category} onChange={(e) => setCategory(e.target.value as ProductCategory)}>
         <option value="COMMON">일반</option>
@@ -121,8 +120,9 @@ function App() {
       <button onClick={handleJudge}>판결 요청</button>
       {isLoading && (
         <div className="progress-wrapper">
-          <div className="progress-bar" />
-          <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
+          <div className="progress-bar">
+            <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
+          </div>
         </div>
       )}
       <div>{loadingMessages[messageIndex]}</div>

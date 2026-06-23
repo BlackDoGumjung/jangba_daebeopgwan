@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { commonVerdicts, otakuVerdicts, stockVerdicts, foodVerdicts, loadingMessages } from "./data/verdicts";
 import { CATEGORY_WEIGHTS, conversions, VERDICT_LABELS } from "./data/config";
 type VerdictType = keyof typeof commonVerdicts | keyof typeof otakuVerdicts | keyof typeof stockVerdicts | keyof typeof foodVerdicts;
+import logo from "./assets/jangba_daebeopgwan.png";
 
 interface VerdictResult {
   caseNumber: string;
@@ -107,7 +108,7 @@ function App() {
   return (
     <div className="container">
       <h1>장바 대법관 v0.1</h1>
-      <img src="/src/assets/jangba_daebeopgwan.png" alt="장바 대법관" className="logo" />
+      <img src={logo} alt="장바 대법관" className="logo" />
       카테고리 :{" "}
       <select value={category} onChange={(e) => setCategory(e.target.value as ProductCategory)}>
         <option value="COMMON">일반</option>

@@ -57,13 +57,18 @@ button {
 }
 .court-section {
   display: flex;
-  align-items: center;
-  gap: 20px;
+  align-items: flex-start;
 }
 .court-footer {
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
+}
+
+.court-label {
+  width: 100px;
+  flex-shrink: 0;
+  font-weight: bold;
 }
 
 .progress-wrapper {

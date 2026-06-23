@@ -170,7 +170,7 @@ function App() {
           </div>
 
           <div className="court-section">
-            <div className="court-label">예상 기회비용 : </div>
+            <div className="court-label">예상기회비용 : </div>
             <div>{result.opCost}</div>
           </div>
 

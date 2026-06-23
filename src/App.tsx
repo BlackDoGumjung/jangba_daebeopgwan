@@ -3,6 +3,7 @@ import { commonVerdicts, otakuVerdicts, stockVerdicts, foodVerdicts, loadingMess
 import { CATEGORY_WEIGHTS, conversions, VERDICT_LABELS } from "./data/config";
 type VerdictType = keyof typeof commonVerdicts | keyof typeof otakuVerdicts | keyof typeof stockVerdicts | keyof typeof foodVerdicts;
 import LOGO from "./assets/jangba_daebeopgwan.png";
+import STAMP_PNG from "./assets/confirm.png";
 
 interface VerdictResult {
   caseNumber: string;
@@ -33,6 +34,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [messageIndex, setMessageIndex] = useState(0);
+  const [showStamp, setShowStamp] = useState(false);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -52,6 +54,22 @@ function App() {
     return () => clearInterval(interval);
   }, [isLoading]);
 
+  const createResult = () => {
+    const randomType = getWeightedVerdict() as VerdictType;
+
+    const resultVerdictComment = CATEGORY_LABELS[category];
+    const comments = resultVerdictComment[randomType];
+    const randomComment = comments[Math.floor(Math.random() * comments.length)];
+
+    setResult({
+      caseNumber: `${new Date().getFullYear()}-장바-${Math.floor(Math.random() * 9999)}`,
+      type: randomType,
+      label: VERDICT_LABELS[randomType],
+      comment: randomComment,
+      opCost: generateCostInfo(parseFloat(price) || 0),
+    });
+  };
+
   const generateCostInfo = (price: number) => {
     const random = conversions[Math.floor(Math.random() * conversions.length)];
 
@@ -69,21 +87,14 @@ function App() {
     setTimeout(() => {
       clearInterval(progressInterval);
       setProgress(100);
-      const randomType = getWeightedVerdict() as VerdictType;
 
-      const resultVerdictComment = CATEGORY_LABELS[category];
-
-      const comments = resultVerdictComment[randomType];
-
-      const randomComment = comments[Math.floor(Math.random() * comments.length)];
-
-      setResult({
-        caseNumber: `${new Date().getFullYear()}-장바-${Math.floor(Math.random() * 9999)}`,
-        type: randomType,
-        label: VERDICT_LABELS[randomType],
-        comment: randomComment,
-        opCost: generateCostInfo(parseFloat(price) || 0),
-      });
+      setResult(null);
+      setShowStamp(true);
+      setTimeout(() => {
+        createResult();
+        setShowStamp(false);
+        setIsLoading(false);
+      }, 2000);
 
       setIsLoading(false);
     }, TOTAL_LOADING_TIME);
@@ -126,6 +137,11 @@ function App() {
         </div>
       )}
       <div>{loadingMessages[messageIndex]}</div>
+      {showStamp && (
+        <div className="stamp-overlay">
+          <img src={STAMP_PNG} alt="판결확정" className="stamp-animation" />
+        </div>
+      )}
       {!isLoading && result && (
         <div className="result-card">
           <div className="court-header">대한민국 장바구니 대법원</div>

@@ -47,6 +47,11 @@ export const conversions = [
     formatter: (count: number) => `치킨 ${count.toFixed(1)}마리`,
   },
   {
+    name: "국밥",
+    unitPrice: 10000,
+    formatter: (count: number) => `국밥 ${Math.floor(count)}그릇`,
+  },
+  {
     name: "메가커피 아아",
     unitPrice: 2000,
     formatter: (count: number) => `메가 아아 ${Math.floor(count)}잔`,
@@ -65,5 +70,10 @@ export const conversions = [
     name: "차은우",
     unitPrice: 20000000000,
     formatter: (count: number) => `${count.toFixed(8).replace(/\.?0+$/, "")} 은우`,
+  },
+  {
+    name: "로또",
+    unitPrice: 1000,
+    formatter: (count: number) => `로또 ${Math.floor(count)}장`,
   },
 ];

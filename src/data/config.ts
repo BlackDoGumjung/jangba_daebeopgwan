@@ -40,6 +40,8 @@ export const VERDICT_LABELS = {
   SPECIAL: "특별재판부",
 };
 
+const formatInt = (value: number) => Math.floor(value).toLocaleString();
+
 export const conversions = [
   {
     name: "치킨",
@@ -49,17 +51,17 @@ export const conversions = [
   {
     name: "국밥",
     unitPrice: 10000,
-    formatter: (count: number) => `국밥 ${Math.floor(count)}그릇`,
+    formatter: (count: number) => `국밥 ${formatInt(count)}그릇`,
   },
   {
     name: "메가커피 아아",
     unitPrice: 2000,
-    formatter: (count: number) => `메가 아아 ${Math.floor(count)}잔`,
+    formatter: (count: number) => `메가 아아 ${formatInt(count)}잔`,
   },
   {
     name: "삼각김밥",
     unitPrice: 1500,
-    formatter: (count: number) => `삼각김밥 ${Math.floor(count)}개`,
+    formatter: (count: number) => `삼각김밥 ${formatInt(count)}개`,
   },
   {
     name: "유툽 프리미엄",
@@ -74,6 +76,6 @@ export const conversions = [
   {
     name: "로또",
     unitPrice: 1000,
-    formatter: (count: number) => `로또 ${Math.floor(count)}장`,
+    formatter: (count: number) => `로또 ${formatInt(count)}장`,
   },
 ];

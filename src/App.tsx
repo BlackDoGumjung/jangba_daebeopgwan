@@ -20,7 +20,7 @@ const CATEGORY_LABELS = {
   OTAKU: otakuVerdicts,
   FOOD: foodVerdicts,
 };
-const MESSAGE_DURATION = 400;
+const MESSAGE_DURATION = 500;
 const TOTAL_LOADING_TIME = loadingMessages.length * MESSAGE_DURATION;
 const INTERVAL = 100;
 const increment = 100 / (TOTAL_LOADING_TIME / INTERVAL);
@@ -47,7 +47,7 @@ function App() {
 
         return prev + 1;
       });
-    }, 350);
+    }, 500);
 
     return () => clearInterval(interval);
   }, [isLoading]);

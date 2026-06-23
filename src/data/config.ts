@@ -40,13 +40,13 @@ export const VERDICT_LABELS = {
   SPECIAL: "특별재판부",
 };
 
-const formatInt = (value: number) => Math.floor(value).toLocaleString();
+const formatInt = (value: number) => value.toFixed(1).toLocaleString();
 
 export const conversions = [
   {
     name: "치킨",
     unitPrice: 20000,
-    formatter: (count: number) => `치킨 ${count.toFixed(1)}마리`,
+    formatter: (count: number) => `치킨 ${formatInt(count)}마리`,
   },
   {
     name: "국밥",

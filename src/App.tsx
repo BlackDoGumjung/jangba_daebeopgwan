@@ -7,6 +7,7 @@ import STAMP_PNG from "./assets/confirm.png";
 
 interface VerdictResult {
   caseNumber: string;
+  productName: string;
   type: VerdictType;
   label: string;
   comment: string;
@@ -63,7 +64,9 @@ function App() {
 
     setResult({
       caseNumber: `${new Date().getFullYear()}-장바-${Math.floor(Math.random() * 9999)}`,
+      productName,
       type: randomType,
+
       label: VERDICT_LABELS[randomType],
       comment: randomComment,
       opCost: generateCostInfo(parseFloat(price) || 0),
@@ -95,8 +98,6 @@ function App() {
         setShowStamp(false);
         setIsLoading(false);
       }, 2000);
-
-      setIsLoading(false);
     }, TOTAL_LOADING_TIME);
   };
   const getWeightedVerdict = () => {
@@ -155,7 +156,7 @@ function App() {
 
           <div className="court-section">
             <div className="court-label">사건명 : </div>
-            <div>{productName} 구매 여부</div>
+            <div>{result.productName} 구매 여부</div>
           </div>
 
           <div className="court-section">
